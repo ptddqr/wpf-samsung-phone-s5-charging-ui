@@ -1,0 +1,53 @@
+﻿<Window x:Class="Battery.BubbleDemo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="气泡Demo" Height="300" Width="300">
+    <Grid Background="Black">
+        <Viewbox Width="200" RenderTransformOrigin="0.5,0.5">
+            <Grid Width="200" Height="200">
+                <!--轮廓-->
+                <Ellipse Width="200" Height="200">
+                    <Ellipse.Fill>
+                        <RadialGradientBrush>
+                            <GradientStop Color="#FF14F00A" Offset="0"/>
+                            <GradientStop Color="#FF14960A" Offset="0.85"/>
+                            <GradientStop Color="#FF14640A" Offset="1"/>
+                        </RadialGradientBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <!--月牙-->
+                <Path Fill="#B2FFFFFF">
+                    <Path.Effect>
+                        <BlurEffect Radius="10"/>
+                    </Path.Effect>
+                    <Path.Data>
+                        <GeometryGroup>
+                            <PathGeometry>
+                                <PathFigure StartPoint="100,185">
+                                    <ArcSegment Point="185,100" Size="100,100"></ArcSegment>
+                                </PathFigure>
+                            </PathGeometry>
+                            <PathGeometry>
+                                <PathFigure StartPoint="100,185">
+                                    <ArcSegment Point="185,100" Size="200,200"></ArcSegment>
+                                </PathFigure>
+                            </PathGeometry>
+                        </GeometryGroup>
+                    </Path.Data>
+                </Path>
+                <!--小圆圈-->
+                <Ellipse Width="20" Height="10" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,40,0,0" Fill="#7FFFFFFF">
+                    <Ellipse.Effect>
+                        <BlurEffect Radius="10"/>
+                    </Ellipse.Effect>
+                </Ellipse>
+                <!--大圆圈-->
+                <Ellipse Width="40" Height="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,55,0,0" Fill="#7FFFFFFF">
+                    <Ellipse.Effect>
+                        <BlurEffect Radius="10"/>
+                    </Ellipse.Effect>
+                </Ellipse>
+            </Grid>
+        </Viewbox>
+    </Grid>
+</Window>

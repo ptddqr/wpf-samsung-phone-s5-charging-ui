@@ -1,0 +1,56 @@
+﻿<Window x:Class="Battery.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="450" Width="280" Loaded="Window_Loaded">
+    <Window.Resources>
+        <Storyboard x:Key="WaterStoryboard">
+            <PointAnimation Storyboard.TargetName="bs_Water" Storyboard.TargetProperty="Point1" From="15,-5" To="15,5" Duration="00:00:2" AutoReverse="True" RepeatBehavior="Forever"></PointAnimation>
+            <PointAnimation Storyboard.TargetName="bs_Water" Storyboard.TargetProperty="Point2" From="35,5" To="35,-5" Duration="00:00:1.8" AutoReverse="True" RepeatBehavior="Forever"></PointAnimation>
+        </Storyboard>
+    </Window.Resources>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Loaded">
+            <BeginStoryboard Storyboard="{StaticResource WaterStoryboard}"></BeginStoryboard>
+        </EventTrigger>
+    </Window.Triggers>
+    <Viewbox>
+        <Grid Background="Black" Width="280" Height="450">
+            <!--电池-->
+            <Grid Width="50" Height="100" Background="#FF5A5A5A">
+                <!--剪切成电池轮廓-->
+                <Grid.Clip>
+                    <PathGeometry>
+                        <PathFigure StartPoint="0,5">
+                            <PolyLineSegment Points="17,5 17,0 33,0 33,5 50,5 50,100 0,100 0,5"></PolyLineSegment>
+                        </PathFigure>
+                    </PathGeometry>
+                </Grid.Clip>
+                <!--充电效果-->
+                <StackPanel VerticalAlignment="Bottom">
+                    <!--水波-->
+                    <Path Fill="#FF0FBE09" Margin="0,0,0,-1">
+                        <Path.Data>
+                            <PathGeometry>
+                                <PathFigure StartPoint="0,0">
+                                    <BezierSegment x:Name="bs_Water" Point1="15,0" Point2="35,0" Point3="50,0"></BezierSegment>
+                                    <PolyLineSegment Points="50,5 0,5"></PolyLineSegment>
+                                </PathFigure>
+                            </PathGeometry>
+                        </Path.Data>
+                    </Path>
+                    <!--矩形-->
+                    <Rectangle Name="rec_Water" Fill="#FF0FBE09" Height="80"></Rectangle>
+                </StackPanel>
+                <!--内部气泡容器-->
+                <Canvas Name="cvs_Inner"></Canvas>
+                <!--进度-->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.Foreground="White" TextBlock.FontSize="18">
+                    <TextBlock Name="text_Value" Text="80"></TextBlock>
+                    <TextBlock Text="%"></TextBlock>
+                </StackPanel>
+            </Grid>
+            <!--外部气泡容器-->
+            <Canvas Name="cvs_Outer" Width="50" Height="100" VerticalAlignment="Bottom"></Canvas>
+        </Grid>
+    </Viewbox>
+</Window>
